@@ -1,6 +1,7 @@
 import sys
-from dataclasses import dataclass
+from collections import defaultdict
 from itertools import product
+from typing import NamedTuple
 
 if len(sys.argv) < 2:
     print(f"usage: {sys.argv[0]} [filename]")
@@ -12,8 +13,7 @@ with open(filename) as fp:
     lines = fp.read().splitlines()
 
 
-@dataclass(order=True, frozen=True)
-class Point:
+class Point(NamedTuple):
     x: int
     y: int
 
@@ -21,7 +21,7 @@ class Point:
 ANGLES = ["^", ">", "v", "<"]
 
 
-def get_moved_positions(grid: list[list[str]]) -> tuple[set[Point], bool]:
+def get_moved_positions(grid: list[list[str]]) -> tuple[defaultdict[Point, int], bool]:
     width, height = len(grid[0]), len(grid)
 
     guard_pos = Point(-1, -1)
@@ -33,18 +33,14 @@ def get_moved_positions(grid: list[list[str]]) -> tuple[set[Point], bool]:
             guard_pos = Point(x, y)
             break
 
-    visited_positions: set[Point] = set()
-    no_visit_threshold = 0
+    visited = defaultdict[Point, int](int)
 
     while True:
         current = grid[guard_pos.y][guard_pos.x]
-        prev_len = len(visited_positions)
-        visited_positions.add(guard_pos)
+        visited[guard_pos] += 1
 
-        if len(visited_positions) == prev_len:
-            no_visit_threshold += 1
-        else:
-            no_visit_threshold = 0
+        if visited[guard_pos] >= 4:
+            return (visited, True)
 
         if (guard_pos.x + 1) < width:
             right = grid[guard_pos.y][guard_pos.x + 1]
@@ -108,12 +104,7 @@ def get_moved_positions(grid: list[list[str]]) -> tuple[set[Point], bool]:
                 grid[guard_pos.y][guard_pos.x] = "X"
                 guard_pos = Point(guard_pos.x - 1, guard_pos.y)
 
-        # if we haven't seen a SINGLE new value after going through each cell
-        # then it's a loop
-        if no_visit_threshold > width * height:
-            return (visited_positions, True)
-
-    return (visited_positions, False)
+    return (visited, False)
 
 
 grid = [list(line) for line in lines]
