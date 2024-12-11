@@ -1,0 +1,30 @@
+[project]
+name = "aocgen"
+description = "Generate boilerplate for Advent of Code"
+authors = [{ name = "Angel Carias", email = "lotta.dev@outlook.com" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Private :: Do Not Upload",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://github.com/aescarias/aoc"
+
+[project.scripts]
+aocgen = "aocgen.__main__:run_setup_cli"
+
+[tool.setuptools.dynamic]
+version = { attr = "aocgen.__version__" }
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
