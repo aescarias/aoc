@@ -21,7 +21,7 @@ Advent of Code $year Day $day: $title
 https://adventofcode.com/$year/day/$day
 \"\"\"
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 # solution here
 
