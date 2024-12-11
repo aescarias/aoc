@@ -5,7 +5,7 @@ https://adventofcode.com/2024/day/4
 
 from itertools import product
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 class Grid:

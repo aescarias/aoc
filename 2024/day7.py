@@ -5,7 +5,7 @@ https://adventofcode.com/2024/day/7
 
 from dataclasses import dataclass
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 @dataclass

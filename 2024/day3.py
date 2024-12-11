@@ -5,7 +5,7 @@ https://adventofcode.com/2024/day/3
 
 import re
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 def sum_mul_operators(data: str, *, conditioned: bool) -> int:

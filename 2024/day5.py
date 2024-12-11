@@ -6,7 +6,7 @@ https://adventofcode.com/2024/day/5
 from itertools import pairwise
 from typing import NamedTuple
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 class OrderRule(NamedTuple):

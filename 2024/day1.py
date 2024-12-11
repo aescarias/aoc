@@ -3,7 +3,7 @@ Advent of Code 2024 Day 1: Historian Hysteria
 https://adventofcode.com/2024/day/1
 """
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 def get_total_distance(pairs: list[list[int]]) -> int:

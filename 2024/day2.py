@@ -3,7 +3,7 @@ Advent of Code 2024 Day 2: Red-Nosed Reports
 https://adventofcode.com/2024/day/2
 """
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 def is_group_safe(group: list[int]) -> bool:

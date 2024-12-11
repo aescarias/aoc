@@ -7,7 +7,7 @@ from collections import defaultdict
 from itertools import product
 from typing import NamedTuple
 
-from aocfw import get_user_input
+from aocgen import get_user_input
 
 
 class Point(NamedTuple):
@@ -93,9 +93,6 @@ class GuardMap:
                 return True
 
         return False
-        # print(*["".join(line) for line in self.cells], sep="\n")
-        # __import__("time").sleep(1)
-        # print("\x1b[2J")
 
 
 def visit_positions(lines: list[str]) -> int:
