@@ -126,15 +126,22 @@ if __name__ == "__main__":
     with args["input_file"] as fp:
         lines = fp.read().splitlines()
 
-    width, height = 101, 103
+    print("Leave the following fields empty to use defaults.")
+    width = input("Width: ").strip()
+    height = input("Height: ").strip()
+    steps = input("Steps (part 1 only): ").strip()
+
+    width = int(width) if width else 101
+    height = int(height) if height else 103
+    steps = int(steps) if steps else 100
 
     if args["part"] == 1:
         robots = parse_robots(lines)
 
-        factor = get_safety_factor(robots, width, height, steps=100)
-        print(f"The safety factor after 100 steps is {factor}")
+        factor = get_safety_factor(robots, width, height, steps)
+        print(f"The safety factor after {steps} step(s) is {factor}")
     elif args["part"] == 2:
         robots = parse_robots(lines)
 
         tree_steps = find_earliest_tree(robots, width, height)
-        print(f"The earliest christmas tree can be found in {tree_steps} steps.")
+        print(f"The earliest christmas tree can be found in {tree_steps} step(s).")

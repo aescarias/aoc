@@ -21,4 +21,4 @@ In the case the `-I` flag is not provided, the solution will look for an input f
 
 ## About aocgen
 
-aocgen is a personal utility for generating boilerplate for Advent of Code solutions. More information about aocgen can be found in its [README](./aocfw/README.md) file.
+aocgen is a personal utility for generating boilerplate for Advent of Code solutions. More information about aocgen can be found in its [README](./aocgen/README.md) file.
