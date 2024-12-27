@@ -5,24 +5,15 @@ https://adventofcode.com/2024/day/6
 
 from collections import defaultdict
 from itertools import product
-from typing import NamedTuple
 
 from aocgen import get_user_input
-
-
-class Point(NamedTuple):
-    x: int
-    y: int
-
-    def moved(self, dx: int, dy: int) -> "Point":
-        return Point(self.x + dx, self.y + dy)
-
+from aocutils import Point
 
 DIRECTIONS = {
-    "^": {"turn": ">", "move": (0, -1)},
-    ">": {"turn": "v", "move": (1, 0)},
-    "v": {"turn": "<", "move": (0, 1)},
-    "<": {"turn": "^", "move": (-1, 0)},
+    "^": {"turn": ">", "move": Point(0, -1)},
+    ">": {"turn": "v", "move": Point(1, 0)},
+    "v": {"turn": "<", "move": Point(0, 1)},
+    "<": {"turn": "^", "move": Point(-1, 0)},
 }
 
 OBSTACLE = "#"
@@ -55,6 +46,7 @@ class GuardMap:
 
     @property
     def current(self) -> str:
+        """The value at the current cell."""
         return self.cells[self.position.y][self.position.x]
 
     @current.setter
@@ -62,16 +54,22 @@ class GuardMap:
         self.cells[self.position.y][self.position.x] = value
 
     def cell_at(self, point: Point) -> str:
+        """Returns the cell at ``point``."""
         return self.cells[point.y][point.x]
 
     def in_map(self, point: Point) -> bool:
+        """Checks whether ``point`` is still in the map."""
         return 0 <= point.y < self.height and 0 <= point.x < self.width
 
     def step(self) -> bool:
+        """Moves one step in the current direction, turning if necessary.
+
+        Returns whether the guard is still within the map.
+        """
         symbol = self.current
         direction = DIRECTIONS[symbol]
 
-        next_pos = self.position.moved(*direction["move"])
+        next_pos = self.position + direction["move"]
         if not self.in_map(next_pos):
             self.visited[self.position] += 1
             self.current = VISITED
@@ -88,6 +86,7 @@ class GuardMap:
         return True
 
     def run(self) -> bool:
+        """Runs a simulation of the guard's movement. Returns whether the simulation resulted in a loop."""
         while self.step():
             if self.visited[self.position] >= 4:
                 return True
@@ -96,6 +95,7 @@ class GuardMap:
 
 
 def visit_positions(lines: list[str]) -> int:
+    """Performs a simulation of the guard's movements and returns the amount of positions the guard visited."""
     guard_map = GuardMap([list(line) for line in lines])
     guard_map.run()
 
@@ -103,6 +103,7 @@ def visit_positions(lines: list[str]) -> int:
 
 
 def get_possible_loops(lines: list[str]) -> int:
+    """Returns the amount of possible loops that a guard could be put into."""
     initial_map = GuardMap([list(line) for line in lines])
     initial_map.run()
 

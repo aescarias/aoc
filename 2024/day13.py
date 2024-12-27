@@ -8,14 +8,7 @@ from collections.abc import Generator
 from typing import NamedTuple
 
 from aocgen import get_user_input
-
-
-class Point(NamedTuple):
-    x: int
-    y: int
-
-    def moved(self, dx: int, dy: int) -> "Point":
-        return Point(self.x + dx, self.y + dy)
+from aocutils import Point
 
 
 class ClawMachine(NamedTuple):
@@ -91,7 +84,7 @@ def parse_claw_machines(
             yield ClawMachine(
                 match_to_point(btn_a_match),
                 match_to_point(btn_b_match),
-                match_to_point(prize_match).moved(prize_increment, prize_increment),
+                match_to_point(prize_match) + Point(prize_increment, prize_increment),
             )
 
 

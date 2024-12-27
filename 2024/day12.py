@@ -8,14 +8,7 @@ from itertools import product
 from typing import NamedTuple
 
 from aocgen import get_user_input
-
-
-class Point(NamedTuple):
-    x: int
-    y: int
-
-    def moved(self, dx: int, dy: int) -> "Point":
-        return Point(self.x + dx, self.y + dy)
+from aocutils import Point
 
 
 class Bounds(NamedTuple):
@@ -33,10 +26,10 @@ def get_adjacent_checked(
     The tuple returned is in the order of top, bottom, left, and right.
     """
 
-    left = position.moved(-1, 0) if position.x - 1 >= bounds.left else None
-    right = position.moved(1, 0) if position.x + 1 < bounds.right else None
-    top = position.moved(0, -1) if position.y - 1 >= bounds.top else None
-    bottom = position.moved(0, 1) if position.y + 1 < bounds.bottom else None
+    left = position + Point(-1, 0) if position.x - 1 >= bounds.left else None
+    right = position + Point(1, 0) if position.x + 1 < bounds.right else None
+    top = position + Point(0, -1) if position.y - 1 >= bounds.top else None
+    bottom = position + Point(0, 1) if position.y + 1 < bounds.bottom else None
 
     return (top, bottom, left, right)
 
@@ -47,10 +40,10 @@ def get_adjacent_unchecked(position: Point) -> tuple[Point, Point, Point, Point]
     The tuple returned is in the order of top, bottom, left, and right.
     """
 
-    left = position.moved(-1, 0)
-    right = position.moved(1, 0)
-    top = position.moved(0, -1)
-    bottom = position.moved(0, 1)
+    left = position + Point(-1, 0)
+    right = position + Point(1, 0)
+    top = position + Point(0, -1)
+    bottom = position + Point(0, 1)
 
     return (top, bottom, left, right)
 

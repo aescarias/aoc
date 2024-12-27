@@ -9,29 +9,7 @@ from itertools import count
 from typing import NamedTuple
 
 from aocgen import get_user_input
-
-
-def wrap(value: int, minimum: int, maximum: int) -> int:
-    """Returns a value such that ``minimum <= value < maximum``, wrapping if needed."""
-    if minimum <= value < maximum:
-        return value
-
-    wrapped = minimum + (value - minimum) % (maximum - minimum)
-
-    return wrap(wrapped, minimum, maximum)
-
-
-class Point(NamedTuple):
-    x: int
-    y: int
-
-    def moved(self, dx: int, dy: int) -> "Point":
-        return Point(self.x + dx, self.y + dy)
-
-    def moved_wrapped(
-        self, dx: int, dy: int, x_range: tuple[int, int], y_range: tuple[int, int]
-    ) -> "Point":
-        return Point(wrap(self.x + dx, *x_range), wrap(self.y + dy, *y_range))
+from aocutils import Point, wrap_point
 
 
 class Robot(NamedTuple):
@@ -65,7 +43,7 @@ def step_robots(robots: list[Robot], width: int, height: int) -> None:
 
     for idx, robot in enumerate(robots):
         robots[idx] = Robot(
-            robot.position.moved_wrapped(*robot.velocity, (0, width), (0, height)),
+            wrap_point(robot.position + robot.velocity, (0, width), (0, height)),
             robot.velocity,
         )
 
