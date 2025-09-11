@@ -38,21 +38,21 @@ if __name__ == "__main__":
 """
 
 
-SESSION_TOKEN_MESSAGE = f"""{Style.RED}No session token provided.{Style.RESET}
-
-Advent of Code assigns different inputs to each user. To retrieve your custom inputs, 
-you must provide your {Style.BOLD}session token{Style.RESET}.
-
-To retrieve your session token, you must log in to Advent of Code, open DevTools, then 
-go to the Storage tab in Firefox (or Application tab in Chrome), then Cookies, and copy 
-the value of the 'session' key into the prompt below.
-
-The input provided will be stored in a {Style.BOLD}TOKEN{Style.RESET} file which will be 
-used by aocgen for future runs. You may also set the {Style.BOLD}AOC_SESSION_TOKEN{Style.RESET} 
-environment variable to load the token automatically.
-
-As the name suggests, keep your token private. {Style.BOLD}{Style.LINED}{Style.RED}DO NOT SHARE{Style.RESET}.
-"""
+SESSION_TOKEN_MESSAGE = (
+    f"{Style.RED}No session token provided.{Style.RESET}\n"
+    f"Advent of Code assigns different inputs to each user. To retrieve your custom "
+    f"inputs, you must provide your {Style.BOLD}session token{Style.RESET}.\n"
+    f"\n"
+    f"To retrieve your session token, you must log in to Advent of Code, open DevTools, "
+    f"then go to the Storage tab in Firefox (or Application tab in Chrome), then Cookies, "
+    f"and copy the value of the 'session' key into the prompt below.\n"
+    f"\n"
+    f"The input provided will be stored in a {Style.BOLD}TOKEN{Style.RESET} file which will "
+    f"be used by aocgen for future runs. You may also set the {Style.BOLD}AOC_SESSION_TOKEN{Style.RESET} "
+    f"environment variable to load the token automatically.\n"
+    f"\n"
+    f"As the name suggests, keep your token private. {Style.BOLD}{Style.LINED}{Style.RED}DO NOT SHARE{Style.RESET}."
+)
 
 
 def write_solution(year: int, day: int, title: str) -> bool:
@@ -146,7 +146,7 @@ def run_setup_cli() -> None:
     if input_written:
         print(f"{Style.GREEN}Input file was written successfully.{Style.RESET}")
     elif reason == "DENIED":
-        print(f"{Style.RED}E:{Style.RESET} User decStyle.lined request.")
+        print(f"{Style.RED}E:{Style.RESET} User declined request.")
     elif reason == "EXISTS":
         print(
             f"{Style.RED}E:{Style.RESET} Input file for day {args.day} already exists. "
