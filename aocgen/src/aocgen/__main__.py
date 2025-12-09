@@ -59,7 +59,7 @@ def write_solution(year: int, day: int, title: str) -> bool:
     template = string.Template(AOC_TEMPLATE)
     output = template.substitute(year=year, day=day, title=title)
 
-    output_path = pathlib.Path(str(year)) / f"day{day}.py"
+    output_path = pathlib.Path(str(year)) / f"day{day:02d}.py"
     output_path.parent.mkdir(exist_ok=True)
 
     if output_path.exists():
@@ -78,7 +78,7 @@ def confirm(prompt: str) -> bool:
 
 
 def write_input(year: int, day: int, key: str) -> tuple[bool, str]:
-    puzzle_input_path = pathlib.Path("inputs") / str(year) / f"day{day}_input.txt"
+    puzzle_input_path = pathlib.Path("inputs") / str(year) / f"day{day:02d}_input.txt"
     puzzle_input_path.parent.mkdir(parents=True, exist_ok=True)
 
     if puzzle_input_path.exists():

@@ -51,7 +51,7 @@ def get_user_input(year: int, day: int) -> Arguments:
         "--input",
         "-I",
         type=argparse.FileType("r"),
-        default=f"inputs/{year}/day{day}_input.txt",
+        default=f"inputs/{year}/day{day:02d}_input.txt",
     )
 
     args = parser.parse_args()
