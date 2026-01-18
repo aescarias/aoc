@@ -10,7 +10,7 @@ Each solution file can be run independently and includes documentation & notes o
 
 ```sh
 # (from the project root)
-python -m 2024.day1 1 -I your_input_file.txt
+python -m 2024.day01 1 -I your_input_file.txt
 ```
 
 Each solution takes an argument `part` and optionally a flag `-I/--input`. The `part` argument specifies the part of the solution to run (if you aren't familiar with Advent of Code, each puzzle is split into two parts -- the second usually being a twist on the first).
